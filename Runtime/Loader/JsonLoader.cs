@@ -7,15 +7,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft;
 
-public class JsonLoader<T> : where T :struct 
+public class JsonLoader
 {
-	public Dictionary<string, T> Load(string path)
+	public Dictionary<string, T> LoadDictionary<T>(string jsonString)
 	{
-		
-		
-		// var text = System.IO.File.ReadAllText(path);
-		// var dict = MiniJSON.Json.Deserialize(text) as Dictionary<string, object>;
-		// return dict;
+		if(string.IsNullOrEmpty(jsonString)) return null;
+
+		var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, T>>(jsonString);
+		return result;
 	}
 }

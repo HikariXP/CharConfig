@@ -3,11 +3,16 @@
  * Created On: 2025.09.26
  * Description: 配置实例接口
  */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IConfigUnit<T>
+public interface IConfigUnit
 {
-	public T GetConfig(string key);
+    public bool TryInitialize<T>(Dictionary<string, T> data);
+
+    public bool TryRelease();
+
+    public T GetConfig<T>(string key);
 }

@@ -10,9 +10,9 @@ using UnityEngine;
 
 public interface IConfigUnit
 {
-    public bool TryInitialize<T>(Dictionary<string, T> data);
+    bool TryInitialize<T>(Dictionary<string, T> data);
 
-    public bool TryRelease();
+    bool TryRelease();
 
-    public T GetConfig<T>(string key);
+    T GetConfig<T>(string key);
 }

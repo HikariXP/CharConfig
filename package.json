@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "displayName": "Char Config",
   "description": "A super simple configuration loader for rapid Unity development",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.1"
+  },
   "keywords": [
     "charsui",
     "char",

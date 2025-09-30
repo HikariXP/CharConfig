@@ -7,18 +7,53 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using CharFramework.Module;
+using CharFramework.Singleton;
 
-public class CharConfig : MonoBehaviour
+public class CharConfig : Singleton<CharConfig>,  IModule
 {
-	private Dictionary<string, IConfigUnit> cachedConfigs = new Dictionary<string, IConfigUnit>(32);
-
-    public void UnloadAll()
+	private Dictionary<System.Type, object> configTables = new Dictionary<System.Type, object>();
+	
+	private IAssetLoader _assetLoader;
+    
+	public void Initialize(IAssetLoader assetLoader)
 	{
-		
+		if (assetLoader == null)
+		{
+			CharLogger.LogError("AssetLoader is null.");
+			return;
+		}
+
+		_assetLoader = assetLoader;
+		// 注册所有配置表(Runtime示例)
+		// RegisterConfig<ItemConfigTable>("Configs/Items");
+		// RegisterConfig<SkillConfigTable>("Configs/Skills");
+		// RegisterConfig<MonsterConfigTable>("Configs/Monsters");
 	}
-
-	public void Unload(string key)
+    
+	public void RegisterConfig<T>(string configPath) where T : new()
 	{
-		
+		var table = new T();
+		var configContext = _assetLoader.LoadAsset<TextAsset>(configPath);
+        
+		if (configContext != null)
+		{
+			var loadMethod = table.GetType().GetMethod("Load");
+			loadMethod?.Invoke(table, new object[] { configContext.text });
+			configTables[typeof(T)] = table;
+		}
+		else
+		{
+			Debug.LogError($"Config file not found: {configPath}");
+		}
+	}
+    
+	public T GetConfigTable<T>() where T : class
+	{
+		if (configTables.TryGetValue(typeof(T), out var table))
+		{
+			return table as T;
+		}
+		return null;
 	}
 }

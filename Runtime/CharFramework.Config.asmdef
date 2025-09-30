@@ -1,3 +1,15 @@
-﻿{
-	"name": "CharFramework.Config"
+{
+    "name": "CharFramework.Config",
+    "references": [
+        "GUID:7c5c005dff140f948bf65c15d7045f86"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

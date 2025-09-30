@@ -4,7 +4,8 @@
   "displayName": "Char Config",
   "description": "A super simple configuration loader for rapid Unity development",
   "dependencies": {
-    "com.unity.nuget.newtonsoft-json": "3.0.1"
+    "com.unity.nuget.newtonsoft-json": "3.0.1",
+    "com.charsui.charframework": "https://github.com/HikariXP/CharFramework.git"
   },
   "keywords": [
     "charsui",
@@ -16,6 +17,5 @@
     "email": "charcharsui@gmail.com",
     "url": "https://github.com/HikariXP"
   },
-  "samples": [
-  ]
+  "samples": []
 }
